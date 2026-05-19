@@ -107,3 +107,8 @@ def decode_output(indices, idx_to_char):
 # Analogy: It's like a decoder ring — you get a sequence of numbers from
 # a secret message and the ring tells you which letter each number maps to.
 # String them all together and you can read the message.
+
+# ── Entry point ────────────────────────────────────────────────────────────────
+
+if __name__ == '__main__':
+    dataloader, char_to_idx, idx_to_char, vocab = prepare_data()
