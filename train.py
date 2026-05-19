@@ -379,3 +379,40 @@ def train(model_type='lstm'):
             loss.backward()               # backpropagation: compute gradients
             torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
             # ↑ gradient clipping: prevents exploding gradients by capping their size
+
+            optimizer.step()              # update model weights
+
+            total_loss += loss.item()     # accumulate the loss for this batch
+
+        # Average loss across all batches in this epoch
+        avg_loss = total_loss / len(dataloader)
+
+        # Perplexity: e^loss — the standard language model evaluation metric
+        perplexity = math.exp(avg_loss)
+
+        print(f"Epoch {epoch+1:02d}/{config.NUM_EPOCHS} | Loss: {avg_loss:.4f} | Perplexity: {perplexity:.2f}")
+
+        # Save the model if this is the best loss we've seen
+        if avg_loss < best_loss:
+            best_loss = avg_loss
+            torch.save({
+                'model_state_dict': model.state_dict(),
+                'char_to_idx':      char_to_idx,
+                'idx_to_char':      idx_to_char,
+                'vocab_size':       vocab_size,
+                'model_type':       model_type
+            }, save_path)
+            print(f"  ✓ Saved best model to {save_path}")
+
+    print(f"\nTraining complete. Best loss: {best_loss:.4f}")
+
+
+# ── Entry point ────────────────────────────────────────────────────────────────
+
+if __name__ == '__main__':
+    import sys
+
+    # Allow passing model type as a command line argument
+    # e.g. python train.py lstm
+    model_type = sys.argv[1] if len(sys.argv) > 1 else 'lstm'
+    train(model_type)
