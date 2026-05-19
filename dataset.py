@@ -157,3 +157,10 @@ class ShakespeareDataset(Dataset):
     # last character hidden, and asks you to guess it. Then it shifts the
     # window one character to the right and asks again. Every possible window
     # position is one training example.
+
+    # ── Entry point ────────────────────────────────────────────────────────────────
+
+if __name__ == '__main__':
+    download_shakespeare()
+    text = load_text()
+    vocab, char_to_idx, idx_to_char = build_vocabulary(text)
