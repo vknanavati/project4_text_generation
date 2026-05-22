@@ -25,23 +25,22 @@ TRANSFORMER_MODEL_PATH = os.path.join(MODELS_DIR, "transformer_model.pt")
 # ── Sequence settings ──────────────────────────────────────────────────────────
 
 # How many characters the model sees at once before making a prediction
-SEQ_LENGTH = 100
-
+SEQ_LENGTH = 50 # was 100
 # ── Training settings ──────────────────────────────────────────────────────────
 
-BATCH_SIZE = 64        # how many sequences to process at once
-NUM_EPOCHS = 20        # how many times to loop through the full dataset
+BATCH_SIZE = 256       # how many sequences to process at once.
+NUM_EPOCHS = 3      # how many times to loop through the full dataset
 LEARNING_RATE = 0.001  # how big a step the optimizer takes each update
 
 # ── Model architecture settings ───────────────────────────────────────────────
 
 EMBEDDING_DIM = 64     # size of the vector representing each character
-HIDDEN_DIM = 256       # size of the hidden state in RNN/LSTM
-NUM_LAYERS = 2         # how many stacked RNN/LSTM layers to use
+HIDDEN_DIM = 64     # size of the hidden state in RNN/LSTM
+NUM_LAYERS = 1         # how many stacked RNN/LSTM layers to use
 
 # Transformer-specific settings
 NUM_HEADS = 4          # number of attention heads in the Transformer
-DROPOUT = 0.1          # fraction of neurons randomly turned off during training (prevents overfitting)
+DROPOUT = 0.0          # fraction of neurons randomly turned off during training (prevents overfitting)
 
 # ── Generation settings ────────────────────────────────────────────────────────
 
