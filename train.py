@@ -334,7 +334,7 @@ def train(model_type='lstm'):
     vocab_size = len(vocab)
 
     # ── Model, loss, optimizer ────────────────────────────────────────────────
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cpu")
     print(f"Using device: {device}")
 
     model = get_model(model_type, vocab_size).to(device)  # move model to GPU if available
